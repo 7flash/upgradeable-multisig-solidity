@@ -20,11 +20,11 @@ contract UpgradeableMultisig {
         require(v.length == required);
         require(v.length == r.length && r.length == s.length);
 
-        bytes32 hash = keccak256(byte(0x19), byte(0), this, destination, value, data, nonce);
+        bytes32 hash = keccak256(byte(0x19), this, destination, value, data, nonce);
 
         for (uint i = 0; i < required; i++) {
             address sender = ecrecover(hash, v[i], r[i], s[i]);
-            //require(isOwner[sender] == true);
+            require(isOwner[sender] == true);
         }
 
         nonce = nonce + 1;

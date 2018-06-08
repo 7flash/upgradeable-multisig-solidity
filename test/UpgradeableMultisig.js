@@ -49,10 +49,6 @@ contract("UpgradeableMultisig", function([deployer, destination]) {
 						value: "0x19"
 					},
 					{
-						type: "bytes",
-						value: "0x"
-					},
-					{
 						type: "address",
 						value: this.multisig.address
 					},
