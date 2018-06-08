@@ -23,7 +23,11 @@ contract Methods is State {
 
         nonce = nonce + 1;
 
-        require(destination.call.value(value)(data));
+        if (destination.call.value(value)(data)) {
+            emit FailedExecution(destination, value);
+        } else {
+            emit SuccessfulExecution(destination, value);
+        }
     }
 
     function upgrade(uint8[] v, bytes32[] r, bytes32[] s, address upgradedMethods)
@@ -41,12 +45,15 @@ contract Methods is State {
 
         nonce = nonce + 1;
 
+        emit Upgraded(methods, upgradedMethods);
+
         methods = upgradedMethods;
     }
 
     function () payable {
     }
 
-//    event Executed(address destination, uint256 value);
-//    event Upgraded(address oldContract, address newContract);
+   event FailedExecution(address destination, uint256 value);
+   event SuccessfulExecution(address destination, uint256 value);
+   event Upgraded(address oldContract, address newContract);
 }
