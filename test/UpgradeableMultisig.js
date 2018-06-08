@@ -4,6 +4,8 @@ const expect = require("chai")
 	.expect;
 
 const UpgradeableMultisig = artifacts.require("UpgradeableMultisig");
+const Methods = artifacts.require("Methods");
+const Methods2 = artifacts.require("MethodsUpgradedExample");
 
 const EthCrypto = require("eth-crypto");
 
@@ -22,7 +24,13 @@ contract("UpgradeableMultisig", function([deployer, destination]) {
 
 			const ownerAddresses = this.owners.map((owner) => owner.address);
 
-			this.multisig = await UpgradeableMultisig.new(2, ownerAddresses);
+			this.methods = await Methods.new(2, ownerAddresses);
+			this.methods2 = await Methods2.new(2, ownerAddresses);
+
+			this.multisig = await UpgradeableMultisig.new(2, ownerAddresses, this.methods.address);
+
+			// extend multisig ABI with methods ABI
+			Object.assign(this.multisig, this.methods);
 
 			await this.multisig.sendTransaction({ from: deployer, value: this.value });
 		});
@@ -83,5 +91,44 @@ contract("UpgradeableMultisig", function([deployer, destination]) {
 
 			expect(web3.eth.getBalance(destination)).to.be.bignumber.above(destinationBalanceBefore);
 		});
+
+		it("should change implementation when signed by 2 of 3 owners", async function() {
+			let vArr = [], rArr = [], sArr = [];
+
+			for (let i = 0; i < this.owners.length - 1; i++) {
+				const hash = EthCrypto.hash.keccak256([
+					{
+						type: "bytes",
+						value: "0x19"
+					},
+					{
+						type: "address",
+						value: this.multisig.address
+					},
+					{
+						type: "address",
+						value: this.methods2.address
+					},
+					{
+						type: "uint256",
+						value: 1
+					}
+				]);
+
+				const signature = EthCrypto.sign(this.owners[i].privateKey, hash);
+
+				const vrs = EthCrypto.vrs.fromString(signature);
+
+				vArr.push(vrs.v);
+				rArr.push(vrs.r);
+				sArr.push(vrs.s)
+			}
+
+			await this.multisig.upgrade(vArr, rArr, sArr, this.methods2.address);
+
+			Object.assign(this.multisig, this.methods2);
+
+			await this.multisig.upgradedMethod();
+		})
 	});
 });
