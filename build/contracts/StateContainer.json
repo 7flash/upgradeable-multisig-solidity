@@ -1,0 +1,192 @@
+{
+  "contractName": "StateContainer",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "state",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060e98061001f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063c19d93fb146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820309352a0a4f6a3b33bf6179eb4212954686e209ebd3f1d0278f5b436a37b4d2a0029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063c19d93fb146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820309352a0a4f6a3b33bf6179eb4212954686e209ebd3f1d0278f5b436a37b4d2a0029",
+  "sourceMap": "57:59:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;57:59:2;;;;;;;",
+  "deployedSourceMap": "57:59:2:-;;;;;;;;;;;;;;;;;;;;;;;;87:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;87:26:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.23;\n\nimport \"./MultisigState.sol\";\n\ncontract StateContainer {\n    MultisigState public state;\n}",
+  "sourcePath": "/home/sevenflash/apps/blockchain/upgradeable-multisig/contracts/StateContainer.sol",
+  "ast": {
+    "absolutePath": "/home/sevenflash/apps/blockchain/upgradeable-multisig/contracts/StateContainer.sol",
+    "exportedSymbols": {
+      "StateContainer": [
+        410
+      ]
+    },
+    "id": 411,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 406,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "absolutePath": "/home/sevenflash/apps/blockchain/upgradeable-multisig/contracts/MultisigState.sol",
+        "file": "./MultisigState.sol",
+        "id": 407,
+        "nodeType": "ImportDirective",
+        "scope": 411,
+        "sourceUnit": 110,
+        "src": "26:29:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 410,
+        "linearizedBaseContracts": [
+          410
+        ],
+        "name": "StateContainer",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 409,
+            "name": "state",
+            "nodeType": "VariableDeclaration",
+            "scope": 410,
+            "src": "87:26:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_MultisigState_$109",
+              "typeString": "contract MultisigState"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 408,
+              "name": "MultisigState",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 109,
+              "src": "87:13:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MultisigState_$109",
+                "typeString": "contract MultisigState"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 411,
+        "src": "57:59:2"
+      }
+    ],
+    "src": "0:116:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/sevenflash/apps/blockchain/upgradeable-multisig/contracts/StateContainer.sol",
+    "exportedSymbols": {
+      "StateContainer": [
+        410
+      ]
+    },
+    "id": 411,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 406,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "absolutePath": "/home/sevenflash/apps/blockchain/upgradeable-multisig/contracts/MultisigState.sol",
+        "file": "./MultisigState.sol",
+        "id": 407,
+        "nodeType": "ImportDirective",
+        "scope": 411,
+        "sourceUnit": 110,
+        "src": "26:29:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 410,
+        "linearizedBaseContracts": [
+          410
+        ],
+        "name": "StateContainer",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 409,
+            "name": "state",
+            "nodeType": "VariableDeclaration",
+            "scope": 410,
+            "src": "87:26:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_MultisigState_$109",
+              "typeString": "contract MultisigState"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 408,
+              "name": "MultisigState",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 109,
+              "src": "87:13:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MultisigState_$109",
+                "typeString": "contract MultisigState"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 411,
+        "src": "57:59:2"
+      }
+    ],
+    "src": "0:116:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.23+commit.124ca40d.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.0",
+  "updatedAt": "2018-06-09T16:56:12.223Z"
+}

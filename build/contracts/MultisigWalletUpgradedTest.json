@@ -1,0 +1,496 @@
+{
+  "contractName": "MultisigWalletUpgradedTest",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "state",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getMultipliedNonce",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b506101ee806100206000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063c19d93fb14610051578063db4dc8bd146100a8575b600080fd5b34801561005d57600080fd5b506100666100d3565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156100b457600080fd5b506100bd6100f8565b6040518082815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600060026000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663affed0e06040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b15801561018157600080fd5b505af1158015610195573d6000803e3d6000fd5b505050506040513d60208110156101ab57600080fd5b8101908080519060200190929190505050029050905600a165627a7a723058205f93efa3b187bb16ffd445045298cbdf720613b8a1c9c4382ed50df784a938570029",
+  "deployedBytecode": "0x60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063c19d93fb14610051578063db4dc8bd146100a8575b600080fd5b34801561005d57600080fd5b506100666100d3565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156100b457600080fd5b506100bd6100f8565b6040518082815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600060026000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663affed0e06040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b15801561018157600080fd5b505af1158015610195573d6000803e3d6000fd5b505050506040513d60208110156101ab57600080fd5b8101908080519060200190929190505050029050905600a165627a7a723058205f93efa3b187bb16ffd445045298cbdf720613b8a1c9c4382ed50df784a938570029",
+  "sourceMap": "58:179:3:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;58:179:3;;;;;;;",
+  "deployedSourceMap": "58:179:3:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;87:26:5;;8:9:-1;5:2;;;30:1;27;20:12;5:2;87:26:5;;;;;;;;;;;;;;;;;;;;;;;;;;;118:117:3;;8:9:-1;5:2;;;30:1;27;20:12;5:2;118:117:3;;;;;;;;;;;;;;;;;;;;;;;87:26:5;;;;;;;;;;;;;:::o;118:117:3:-;181:7;227:1;211:5;;;;;;;;;;;:11;;;:13;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;211:13:3;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;211:13:3;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;211:13:3;;;;;;;;;;;;;;;;:17;204:24;;118:117;:::o",
+  "source": "pragma solidity ^0.4.23;\n\nimport \"./StateContainer.sol\";\n\ncontract MultisigWalletUpgradedTest is StateContainer {\n    function getMultipliedNonce()\n        public constant returns (uint256)\n    {\n        return state.nonce() * 2;\n    }\n}",
+  "sourcePath": "/home/sevenflash/apps/blockchain/upgradeable-multisig/contracts/MultisigWalletUpgradedTest.sol",
+  "ast": {
+    "absolutePath": "/home/sevenflash/apps/blockchain/upgradeable-multisig/contracts/MultisigWalletUpgradedTest.sol",
+    "exportedSymbols": {
+      "MultisigWalletUpgradedTest": [
+        471
+      ]
+    },
+    "id": 472,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 455,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:3"
+      },
+      {
+        "absolutePath": "/home/sevenflash/apps/blockchain/upgradeable-multisig/contracts/StateContainer.sol",
+        "file": "./StateContainer.sol",
+        "id": 456,
+        "nodeType": "ImportDirective",
+        "scope": 472,
+        "sourceUnit": 566,
+        "src": "26:30:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 457,
+              "name": "StateContainer",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 565,
+              "src": "97:14:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_StateContainer_$565",
+                "typeString": "contract StateContainer"
+              }
+            },
+            "id": 458,
+            "nodeType": "InheritanceSpecifier",
+            "src": "97:14:3"
+          }
+        ],
+        "contractDependencies": [
+          565
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 471,
+        "linearizedBaseContracts": [
+          471,
+          565
+        ],
+        "name": "MultisigWalletUpgradedTest",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 469,
+              "nodeType": "Block",
+              "src": "194:41:3",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 467,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 463,
+                          "name": "state",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 564,
+                          "src": "211:5:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_MultisigState_$166",
+                            "typeString": "contract MultisigState"
+                          }
+                        },
+                        "id": 464,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "nonce",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 60,
+                        "src": "211:11:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
+                          "typeString": "function () view external returns (uint256)"
+                        }
+                      },
+                      "id": 465,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "211:13:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "*",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "hexValue": "32",
+                      "id": 466,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "227:1:3",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_2_by_1",
+                        "typeString": "int_const 2"
+                      },
+                      "value": "2"
+                    },
+                    "src": "211:17:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 462,
+                  "id": 468,
+                  "nodeType": "Return",
+                  "src": "204:24:3"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 470,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "getMultipliedNonce",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 459,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "145:2:3"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 462,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 461,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 470,
+                  "src": "181:7:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 460,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "181:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "180:9:3"
+            },
+            "scope": 471,
+            "src": "118:117:3",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 472,
+        "src": "58:179:3"
+      }
+    ],
+    "src": "0:237:3"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/sevenflash/apps/blockchain/upgradeable-multisig/contracts/MultisigWalletUpgradedTest.sol",
+    "exportedSymbols": {
+      "MultisigWalletUpgradedTest": [
+        471
+      ]
+    },
+    "id": 472,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 455,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:3"
+      },
+      {
+        "absolutePath": "/home/sevenflash/apps/blockchain/upgradeable-multisig/contracts/StateContainer.sol",
+        "file": "./StateContainer.sol",
+        "id": 456,
+        "nodeType": "ImportDirective",
+        "scope": 472,
+        "sourceUnit": 566,
+        "src": "26:30:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 457,
+              "name": "StateContainer",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 565,
+              "src": "97:14:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_StateContainer_$565",
+                "typeString": "contract StateContainer"
+              }
+            },
+            "id": 458,
+            "nodeType": "InheritanceSpecifier",
+            "src": "97:14:3"
+          }
+        ],
+        "contractDependencies": [
+          565
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 471,
+        "linearizedBaseContracts": [
+          471,
+          565
+        ],
+        "name": "MultisigWalletUpgradedTest",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 469,
+              "nodeType": "Block",
+              "src": "194:41:3",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 467,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 463,
+                          "name": "state",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 564,
+                          "src": "211:5:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_MultisigState_$166",
+                            "typeString": "contract MultisigState"
+                          }
+                        },
+                        "id": 464,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "nonce",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 60,
+                        "src": "211:11:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
+                          "typeString": "function () view external returns (uint256)"
+                        }
+                      },
+                      "id": 465,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "211:13:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "*",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "hexValue": "32",
+                      "id": 466,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "227:1:3",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_2_by_1",
+                        "typeString": "int_const 2"
+                      },
+                      "value": "2"
+                    },
+                    "src": "211:17:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 462,
+                  "id": 468,
+                  "nodeType": "Return",
+                  "src": "204:24:3"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 470,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "getMultipliedNonce",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 459,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "145:2:3"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 462,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 461,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 470,
+                  "src": "181:7:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 460,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "181:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "180:9:3"
+            },
+            "scope": 471,
+            "src": "118:117:3",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 472,
+        "src": "58:179:3"
+      }
+    ],
+    "src": "0:237:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.23+commit.124ca40d.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.0",
+  "updatedAt": "2018-06-09T15:58:27.429Z"
+}

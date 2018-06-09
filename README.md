@@ -34,7 +34,7 @@ truffle migrate --network ropsten -f 2
 ```
 
 ## Upgrade
-1) Prepare new version of MultisigWalletUpgradedTest.sol
+1) Prepare new version of MultisigWalletUpgraded.sol
 2) Collect signatures from owners and set `signatures` field at config.json
 3) Run migration to deploy prepared version of methods and call method to change wallet in proxy
 ```
