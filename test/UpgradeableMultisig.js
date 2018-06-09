@@ -4,6 +4,7 @@ const expect = require("chai")
 	.expect;
 
 const UpgradeableMultisig = artifacts.require("UpgradeableMultisig");
+const State = artifacts.require("State");
 const Methods = artifacts.require("Methods");
 const Methods2 = artifacts.require("MethodsUpgradedExample");
 
@@ -12,6 +13,14 @@ const EthCrypto = require("eth-crypto");
 const firstOwner = EthCrypto.createIdentity();
 const secondOwner = EthCrypto.createIdentity();
 const thirdOwner = EthCrypto.createIdentity();
+
+function extend(obj1, obj2) {
+	Object.keys(obj2).forEach(function(key) {
+		if (!(key in obj1)) {
+			obj1[key] = obj2[key];
+		}
+	});
+}
 
 contract("UpgradeableMultisig", function([deployer, destination]) {
 	describe("2 of 3", () => {
@@ -24,22 +33,22 @@ contract("UpgradeableMultisig", function([deployer, destination]) {
 
 			const ownerAddresses = this.owners.map((owner) => owner.address);
 
-			this.methods = await Methods.new(2, ownerAddresses);
-			this.methods2 = await Methods2.new(2, ownerAddresses);
+			this.methods = await Methods.new();
+			this.methods2 = await Methods2.new();
 
 			this.multisig = await UpgradeableMultisig.new(2, ownerAddresses, this.methods.address);
 
 			// extend multisig ABI with methods ABI
-			Object.assign(this.multisig, this.methods);
+			Object.assign(this.multisig, Methods.at(this.multisig.address));
 
 			await this.multisig.sendTransaction({ from: deployer, value: this.value });
 		});
 
 		it("should be initialized correctly", async function() {
-			expect(await this.multisig.owners(0)).to.be.bignumber.equal(this.owners[0].address);
-			expect(await this.multisig.owners(1)).to.be.bignumber.equal(this.owners[1].address);
-			expect(await this.multisig.owners(2)).to.be.bignumber.equal(this.owners[2].address);
-			expect(await this.multisig.required()).to.be.bignumber.equal(2);
+			expect(await State.at(await this.multisig.state()).owners(0)).to.be.bignumber.equal(this.owners[0].address);
+			expect(await State.at(await this.multisig.state()).owners(1)).to.be.bignumber.equal(this.owners[1].address);
+			expect(await State.at(await this.multisig.state()).owners(2)).to.be.bignumber.equal(this.owners[2].address);
+			expect(await State.at(await this.multisig.state()).required()).to.be.bignumber.equal(2);
 			expect(web3.eth.getBalance(this.multisig.address)).to.be.bignumber.equal(this.value);
 		});
 
@@ -126,9 +135,9 @@ contract("UpgradeableMultisig", function([deployer, destination]) {
 
 			await this.multisig.upgrade(vArr, rArr, sArr, this.methods2.address);
 
-			Object.assign(this.multisig, this.methods2);
+			Object.assign(this.multisig, Methods2.at(this.multisig.address));
 
-			await this.multisig.upgradedMethod();
+			expect(await this.multisig.getMultipliedNonce()).to.be.bignumber.equal(2*2);
 		})
 	});
 });

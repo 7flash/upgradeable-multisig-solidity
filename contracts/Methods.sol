@@ -1,27 +1,20 @@
 pragma solidity ^0.4.23;
 
-import "./State.sol";
+import "./StateContainer.sol";
 
-contract Methods is State {
-    // you can pass anything in constructor because multisig store it's own permanent state independently of methods contract state
-    function Methods(uint256 _required, address[] _owners)
-        State(_required, _owners)
-        public
-    {
-    }
-
+contract Methods is StateContainer {
     function execute(uint8[] v, bytes32[] r, bytes32[] s, address destination, uint256 value, bytes data) public {
-        require(v.length == required);
+        require(v.length == state.required());
         require(v.length == r.length && r.length == s.length);
 
-        bytes32 hash = keccak256(byte(0x19), this, destination, value, data, nonce);
+        bytes32 hash = keccak256(byte(0x19), this, destination, value, data, state.nonce());
 
-        for (uint i = 0; i < required; i++) {
+        for (uint i = 0; i < state.required(); i++) {
             address sender = ecrecover(hash, v[i], r[i], s[i]);
-            require(isOwner[sender] == true);
+            require(state.isOwner(sender) == true);
         }
 
-        nonce = nonce + 1;
+        state.incrementNonce();
 
         if (destination.call.value(value)(data)) {
             emit FailedExecution(destination, value);
@@ -33,27 +26,27 @@ contract Methods is State {
     function upgrade(uint8[] v, bytes32[] r, bytes32[] s, address upgradedMethods)
         public
     {
-        require(v.length == required);
+        require(v.length == state.required());
         require(v.length == r.length && r.length == s.length);
 
-        bytes32 hash = keccak256(byte(0x19), this, upgradedMethods, nonce);
+        bytes32 hash = keccak256(byte(0x19), this, upgradedMethods, state.nonce());
 
-        for (uint i = 0; i < required; i++) {
+        for (uint i = 0; i < state.required(); i++) {
             address sender = ecrecover(hash, v[i], r[i], s[i]);
-            require(isOwner[sender] == true);
+            require(state.isOwner(sender) == true);
         }
 
-        nonce = nonce + 1;
+        state.incrementNonce();
 
-        emit Upgraded(methods, upgradedMethods);
+        emit Upgraded(state.methods(), upgradedMethods);
 
-        methods = upgradedMethods;
+        state.changeMethods(upgradedMethods);
     }
 
     function () payable {
     }
 
-   event FailedExecution(address destination, uint256 value);
-   event SuccessfulExecution(address destination, uint256 value);
-   event Upgraded(address oldContract, address newContract);
+    event FailedExecution(address destination, uint256 value);
+    event SuccessfulExecution(address destination, uint256 value);
+    event Upgraded(address oldContract, address newContract);
 }
