@@ -5,7 +5,10 @@ const MultisigWallet = artifacts.require("MultisigWallet");
 const { required, owners } = require("../config.json");
 
 module.exports = function(deployer, network, accounts) {
-	//if(network === 'develop') return;
+	if(network === 'develop') return;
+
+	console.log("Owners: ");
+	console.log(owners);
 
 	deployer.then(function() {
 		return deployer.deploy(ProxyMultisig, required, owners);

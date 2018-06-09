@@ -6,6 +6,8 @@ const ProxyMultisig = artifacts.require("ProxyMultisig");
 const { upgradeSignatures } = require("../config.json");
 
 module.exports = function(deployer, network, accounts) {
+	if(network === 'develop') return;
+
 	let vArr = [], rArr = [], sArr = [];
 
 	for(let i = 0; i < upgradeSignatures.length; i++) {
@@ -27,6 +29,8 @@ module.exports = function(deployer, network, accounts) {
 
 		return ProxyMultisig.deployed();
 	}).then(function(proxy) {
+		Object.assign(proxy, MultisigWalletUpgraded.at(proxy.address));
+
 		return proxy.upgrade(vArr, rArr, sArr, newMethods.address);
 	}).then(function() {
 		console.log(`${proxy.address} upgraded to ${netMethods.address}`);

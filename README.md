@@ -43,6 +43,14 @@ truffle migrate --network ropsten -f 3
 
 ## Ropsten example
 
+Multisig deployed at 0xfa16f7f41a981e63956e493f00d4c1b2b9a67fe2
+
+State deployed at 0x98dde691512e12fed869baa519aa0a213b066b25
+
+Methods deployed at 0x8df3823ae493120c31318a26515ecbc271b8c140
+
+
+
 ## Limitations
 - State has predefined structure
 - Owners cannot add/remove owner
