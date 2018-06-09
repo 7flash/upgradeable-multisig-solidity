@@ -2,7 +2,7 @@ pragma solidity ^0.4.23;
 
 import "./StateContainer.sol";
 
-contract Methods is StateContainer {
+contract MultisigWallet is StateContainer {
     function execute(uint8[] v, bytes32[] r, bytes32[] s, address destination, uint256 value, bytes data) public {
         require(v.length == state.required());
         require(v.length == r.length && r.length == s.length);

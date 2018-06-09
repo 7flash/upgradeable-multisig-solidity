@@ -2,7 +2,7 @@ pragma solidity ^0.4.23;
 
 import "./StateContainer.sol";
 
-contract MethodsUpgradedExample is StateContainer {
+contract MultisigWalletUpgradedTest is StateContainer {
     function getMultipliedNonce()
         public constant returns (uint256)
     {

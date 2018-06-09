@@ -1,7 +1,7 @@
 pragma solidity ^0.4.23;
 
-import "./State.sol";
+import "./MultisigState.sol";
 
 contract StateContainer {
-    State public state;
+    MultisigState public state;
 }

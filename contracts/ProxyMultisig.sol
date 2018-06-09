@@ -1,10 +1,11 @@
 pragma solidity ^0.4.23;
 
-import "./State.sol";
+import "./MultisigState.sol";
+import "./MultisigWallet.sol";
 import "./StateContainer.sol";
 
-contract UpgradeableMultisig is StateContainer {
-    function UpgradeableMultisig(uint256 _required, address[] _owners, address _methods)
+contract ProxyMultisig is StateContainer {
+    function ProxyMultisig(uint256 _required, address[] _owners)
         public
     {
         require(_required <= _owners.length);
@@ -15,7 +16,8 @@ contract UpgradeableMultisig is StateContainer {
             previousOwner = _owners[i];
         }
 
-        state = new State(_required, _owners, _methods);
+        address methods = new MultisigWallet();
+        state = new MultisigState(_required, _owners, methods);
     }
 
     function () payable public {

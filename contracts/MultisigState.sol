@@ -1,6 +1,6 @@
 pragma solidity ^0.4.23;
 
-contract State {
+contract MultisigState {
     uint256 public nonce;
     mapping (address => bool) public isOwner;
 
@@ -16,7 +16,7 @@ contract State {
         _;
     }
 
-    function State (uint256 _required, address[] _owners, address _methods)
+    function MultisigState (uint256 _required, address[] _owners, address _methods)
         public
     {
         assert(msg.sender != tx.origin);

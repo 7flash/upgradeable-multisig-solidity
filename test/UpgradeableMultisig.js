@@ -3,10 +3,10 @@ const expect = require("chai")
 	.use(require("chai-bignumber")(web3.BigNumber))
 	.expect;
 
-const UpgradeableMultisig = artifacts.require("UpgradeableMultisig");
-const State = artifacts.require("State");
-const Methods = artifacts.require("Methods");
-const Methods2 = artifacts.require("MethodsUpgradedExample");
+const ProxyMultisig = artifacts.require("ProxyMultisig");
+const State = artifacts.require("MultisigState");
+const Methods = artifacts.require("MultisigWallet");
+const Methods2 = artifacts.require("MultisigWalletUpgradedTest");
 
 const EthCrypto = require("eth-crypto");
 
@@ -26,10 +26,9 @@ contract("UpgradeableMultisig", function([deployer, destination]) {
 
 			const ownerAddresses = this.owners.map((owner) => owner.address);
 
-			this.methods = await Methods.new();
 			this.methods2 = await Methods2.new();
 
-			this.multisig = await UpgradeableMultisig.new(2, ownerAddresses, this.methods.address);
+			this.multisig = await ProxyMultisig.new(2, ownerAddresses);
 
 			// extend multisig ABI with methods ABI
 			Object.assign(this.multisig, Methods.at(this.multisig.address));
