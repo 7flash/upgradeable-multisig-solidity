@@ -7,6 +7,14 @@ contract UpgradeableMultisig is StateContainer {
     function UpgradeableMultisig(uint256 _required, address[] _owners, address _methods)
         public
     {
+        require(_required <= _owners.length);
+
+        address previousOwner = address(0);
+        for(uint256 i = 0; i < _owners.length; i++) {
+            require(_owners[i] > previousOwner);
+            previousOwner = _owners[i];
+        }
+
         state = new State(_required, _owners, _methods);
     }
 

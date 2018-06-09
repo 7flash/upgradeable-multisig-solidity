@@ -9,9 +9,14 @@ contract Methods is StateContainer {
 
         bytes32 hash = keccak256(byte(0x19), this, destination, value, data, state.nonce());
 
+        address previousSender = address(0);
         for (uint i = 0; i < state.required(); i++) {
             address sender = ecrecover(hash, v[i], r[i], s[i]);
+
+            require(sender > previousSender);
             require(state.isOwner(sender) == true);
+
+            previousSender = sender;
         }
 
         state.incrementNonce();
@@ -31,9 +36,14 @@ contract Methods is StateContainer {
 
         bytes32 hash = keccak256(byte(0x19), this, upgradedMethods, state.nonce());
 
+        address previousSender = address(0);
         for (uint i = 0; i < state.required(); i++) {
             address sender = ecrecover(hash, v[i], r[i], s[i]);
+
+            require(sender > previousSender);
             require(state.isOwner(sender) == true);
+
+            previousSender = sender;
         }
 
         state.incrementNonce();

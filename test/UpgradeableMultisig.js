@@ -14,14 +14,6 @@ const firstOwner = EthCrypto.createIdentity();
 const secondOwner = EthCrypto.createIdentity();
 const thirdOwner = EthCrypto.createIdentity();
 
-function extend(obj1, obj2) {
-	Object.keys(obj2).forEach(function(key) {
-		if (!(key in obj1)) {
-			obj1[key] = obj2[key];
-		}
-	});
-}
-
 contract("UpgradeableMultisig", function([deployer, destination]) {
 	describe("2 of 3", () => {
 		before(async function() {
@@ -29,7 +21,8 @@ contract("UpgradeableMultisig", function([deployer, destination]) {
 
 			this.owners = [firstOwner, secondOwner, thirdOwner];
 
-			this.owners.sort();
+			// for cheap duplicates check
+			this.owners.sort((a, b) => a.address - b.address);
 
 			const ownerAddresses = this.owners.map((owner) => owner.address);
 
@@ -59,34 +52,34 @@ contract("UpgradeableMultisig", function([deployer, destination]) {
 
 			let vArr = [], rArr = [], sArr = [];
 
-			for (let i = 0; i < this.owners.length - 1; i++) {
-				const hash = EthCrypto.hash.keccak256([
-					{
-						type: "bytes",
-						value: "0x19"
-					},
-					{
-						type: "address",
-						value: this.multisig.address
-					},
-					{
-						type: "address",
-						value: destination
-					},
-					{
-						type: "uint256",
-						value: this.value
-					},
-					{
-						type: "bytes",
-						value: data
-					},
-					{
-						type: "uint256",
-						value: 0
-					}
-				]);
+			const hash = EthCrypto.hash.keccak256([
+				{
+					type: "bytes",
+					value: "0x19"
+				},
+				{
+					type: "address",
+					value: this.multisig.address
+				},
+				{
+					type: "address",
+					value: destination
+				},
+				{
+					type: "uint256",
+					value: this.value
+				},
+				{
+					type: "bytes",
+					value: data
+				},
+				{
+					type: "uint256",
+					value: 0
+				}
+			]);
 
+			for (let i = 0; i < this.owners.length - 1; i++) {
 				const signature = EthCrypto.sign(this.owners[i].privateKey, hash);
 
 				const vrs = EthCrypto.vrs.fromString(signature);
@@ -104,26 +97,26 @@ contract("UpgradeableMultisig", function([deployer, destination]) {
 		it("should change implementation when signed by 2 of 3 owners", async function() {
 			let vArr = [], rArr = [], sArr = [];
 
-			for (let i = 0; i < this.owners.length - 1; i++) {
-				const hash = EthCrypto.hash.keccak256([
-					{
-						type: "bytes",
-						value: "0x19"
-					},
-					{
-						type: "address",
-						value: this.multisig.address
-					},
-					{
-						type: "address",
-						value: this.methods2.address
-					},
-					{
-						type: "uint256",
-						value: 1
-					}
-				]);
+			const hash = EthCrypto.hash.keccak256([
+				{
+					type: "bytes",
+					value: "0x19"
+				},
+				{
+					type: "address",
+					value: this.multisig.address
+				},
+				{
+					type: "address",
+					value: this.methods2.address
+				},
+				{
+					type: "uint256",
+					value: 1
+				}
+			]);
 
+			for (let i = 0; i < this.owners.length - 1; i++) {
 				const signature = EthCrypto.sign(this.owners[i].privateKey, hash);
 
 				const vrs = EthCrypto.vrs.fromString(signature);
@@ -138,6 +131,50 @@ contract("UpgradeableMultisig", function([deployer, destination]) {
 			Object.assign(this.multisig, Methods2.at(this.multisig.address));
 
 			expect(await this.multisig.getMultipliedNonce()).to.be.bignumber.equal(2*2);
-		})
+		});
+
+		it("should fail to execute transaction signed twice by the same owner", async function() {
+			const hash = EthCrypto.hash.keccak256([
+				{
+					type: "bytes",
+					value: "0x19"
+				},
+				{
+					type: "address",
+					value: this.multisig.address
+				},
+				{
+					type: "address",
+					value: destination
+				},
+				{
+					type: "uint256",
+					value: this.value
+				},
+				{
+					type: "bytes",
+					value: "0x"
+				},
+				{
+					type: "uint256",
+					value: "2"
+				}
+			]);
+
+			const signature = EthCrypto.sign(this.owners[0].privateKey, hash);
+			const vrs = EthCrypto.vrs.fromString(signature);
+
+			const vArr = [vrs.v, vrs.v];
+			const rArr = [vrs.r, vrs.r];
+			const sArr = [vrs.s, vrs.s];
+
+			try {
+				await this.multisig.execute(vArr, rArr, sArr, destination, this.value, "0x");
+			} catch(e) {
+				return;
+			}
+
+			expect.fail("Expected throw but executed successfuly");
+		});
 	});
 });
