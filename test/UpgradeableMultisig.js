@@ -6,7 +6,7 @@ const expect = require("chai")
 const ProxyMultisig = artifacts.require("ProxyMultisig");
 const State = artifacts.require("MultisigState");
 const Methods = artifacts.require("MultisigWallet");
-const Methods2 = artifacts.require("MultisigWalletUpgradedTest");
+const Methods2 = artifacts.require("MultisigWalletUpgraded");
 
 const EthCrypto = require("eth-crypto");
 
@@ -129,7 +129,7 @@ contract("UpgradeableMultisig", function([deployer, destination]) {
 
 			Object.assign(this.multisig, Methods2.at(this.multisig.address));
 
-			expect(await this.multisig.getMultipliedNonce()).to.be.bignumber.equal(2*2);
+			expect(await this.multisig.newMethod()).to.be.equal(true);
 		});
 
 		it("should fail to execute transaction signed twice by the same owner", async function() {
