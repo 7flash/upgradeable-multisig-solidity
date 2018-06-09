@@ -1,0 +1,10 @@
+{
+  "required": 2,
+  "owners": [
+    "0x2B039dDEb4E4BaB9db4c4C0D5584fb620797E3B3",
+    "0x38E86bA7be531597e670138645c80dd09Bb4314e",
+    "0xA4c45b3F535B9C04E96ED61b521364C3A6E1B631"
+  ],
+  "upgradeSignatures": [
+  ]
+}
