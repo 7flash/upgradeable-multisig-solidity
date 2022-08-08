@@ -4,6 +4,8 @@ It has a flaw because the more logic becomes complicated the more probability fo
 
 The solution is to make multisig wallet upgradeable. That way the owners can change the functionality by their agreement.
 
+![image](https://user-images.githubusercontent.com/4569866/183349501-a2886c5f-379f-4b29-b1d2-c5d7dc576e7d.png)
+
 ### Architecture
 
 ### ProxyMultisig.sol
